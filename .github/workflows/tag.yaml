@@ -24,7 +24,7 @@ jobs:
           #  type=sha
       - name: Debug metadata output
         run: |
-          echo "Metadata outputs: ${{ toJson(steps.metadata.outputs) }}"
+          echo "Metadata outputs: ${{ toJson(steps.metadata.outputs.labels) }}"
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
