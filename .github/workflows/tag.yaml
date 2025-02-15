@@ -15,10 +15,13 @@ jobs:
         run: |
           echo "IMAGE=$(echo ${{ github.ref_name }} | cut -d'/' -f1)" >> $GITHUB_ENV
           echo "VERSION=$(echo ${{ github.ref_name }} | cut -d'/' -f2)" >> $GITHUB_ENV
-      - name: Debug
-        run: |
-          echo "Image: $IMAGE"
-          echo "Version: $VERSION"
+      - uses: docker/metadata-action@v5
+        id: metadata
+        with:
+          images: ghcr.io/${{ github.repository }}
+          #tags: |
+          #  type=ref,event=tag
+          #  type=sha
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -27,7 +30,8 @@ jobs:
       - uses: int128/kaniko-action@v1
         with:
           context: images/${{ env.IMAGE }}
-          push: true
           tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE }}/${{ env.VERSION }}
+          labels: ${{ steps.metadata.outputs.labels }}
+          push: true
           cache: true
           cache-repository: ghcr.io/${{ github.repository }}/kaniko-cache
