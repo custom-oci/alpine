@@ -19,4 +19,15 @@ jobs:
         run: |
           echo "Image: $IMAGE"
           echo "Version: $VERSION"
-
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: int128/kaniko-action@v1
+        with:
+          context: images/${{ env.IMAGE }}
+          push: true
+          tags: ${{ env.VERSION }}
+          cache: true
+          cache-repository: ghcr.io/${{ github.repository }}/kaniko-cache
