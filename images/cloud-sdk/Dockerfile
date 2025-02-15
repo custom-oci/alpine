@@ -1,3 +1,3 @@
-FROM google/cloud-sdk:495.0.0-alpine
+FROM google/cloud-sdk:510.0.0-alpine
 
 RUN apk add --no-cache sops
