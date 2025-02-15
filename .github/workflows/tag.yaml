@@ -35,9 +35,12 @@ jobs:
           context: images/${{ env.IMAGE }}
           tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE }}:${{ env.VERSION }}
           labels: |
-            x=1
-            y=2
-            z=3
+            org.opencontainers.image.title=${{ env.IMAGE }}
+            org.opencontainers.image.version=${{ env.VERSION }}
+            org.opencontainers.image.created=${{ github.event.head_commit.timestamp }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=${{ github.repositoryUrl }}/images/${{ env.IMAGE }}/Dockerfile
+            org.opencontainers.image.url=${{ github.repositoryUrl }}
           push: true
           cache: true
           cache-repository: ghcr.io/${{ github.repository }}/kaniko-cache
