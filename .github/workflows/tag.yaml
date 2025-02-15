@@ -28,6 +28,6 @@ jobs:
         with:
           context: images/${{ env.IMAGE }}
           push: true
-          tags: ${{ env.VERSION }}
+          tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE }}/${{ env.VERSION }}
           cache: true
           cache-repository: ghcr.io/${{ github.repository }}/kaniko-cache
