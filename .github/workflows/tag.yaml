@@ -34,7 +34,10 @@ jobs:
         with:
           context: images/${{ env.IMAGE }}
           tags: ghcr.io/${{ github.repository }}/${{ env.IMAGE }}:${{ env.VERSION }}
-          labels: ${{ steps.metadata.outputs.labels }}
+          labels: |
+            x=1
+            y=2
+            z=3
           push: true
           cache: true
           cache-repository: ghcr.io/${{ github.repository }}/kaniko-cache
