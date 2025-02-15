@@ -30,7 +30,7 @@ jobs:
       - uses: int128/kaniko-action@v1
         with:
           context: images/${{ env.IMAGE }}
-          tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE }}/${{ env.VERSION }}
+          tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE }}:${{ env.VERSION }}
           labels: ${{ steps.metadata.outputs.labels }}
           push: true
           cache: true
