@@ -9,8 +9,14 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    labels:
+      - "dependabot"
+      - "github-actions"
   - package-ecosystem: "docker"
     directories:
       - "/images/*"
     schedule:
       interval: "daily"
+    labels:
+      - "dependabot"
+      - "dockerfile"
